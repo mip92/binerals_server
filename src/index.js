@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 4000
 const app = express()
 const path =require('path')
 const fileUpload =require('express-fileupload')
+const errorMiddleware=require('./middlwares/error-middleware')
 
 app.use(cors({
     credentials:true,
@@ -16,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileUpload({}))
 
 app.use('/api',router)
+app.use(errorMiddleware)
 
 const start = async () => {
     try {
